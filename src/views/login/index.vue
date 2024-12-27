@@ -3,13 +3,7 @@
     <!-- 登录页头部 -->
     <div class="login-header">
       <div class="flex-y-center">
-        <el-switch
-          v-model="isDark"
-          inline-prompt
-          active-icon="Moon"
-          inactive-icon="Sunny"
-          @change="toggleTheme"
-        />
+        <el-switch v-model="isDark" inline-prompt active-icon="Moon" inactive-icon="Sunny" @change="toggleTheme" />
         <lang-select class="ml-2 cursor-pointer" />
       </div>
     </div>
@@ -22,7 +16,8 @@
       <div class="login-form">
         <el-form ref="loginFormRef" :model="loginData" :rules="loginRules">
           <div class="form-title">
-            <h2>{{ defaultSettings.title }}</h2>
+            <!-- <h2>{{ defaultSettings.title }}</h2> -->
+            <h2>科创平台后台管理系统</h2>
             <el-dropdown style="position: absolute; right: 0">
               <div class="cursor-pointer">
                 <el-icon>
@@ -38,19 +33,13 @@
                     </el-tag>
                   </el-dropdown-item>
 
-                  <el-dropdown-item
-                    @click="setLoginCredentials('root', '123456')"
-                  >
+                  <el-dropdown-item @click="setLoginCredentials('root', '123456')">
                     超级管理员：root/123456
                   </el-dropdown-item>
-                  <el-dropdown-item
-                    @click="setLoginCredentials('admin', '123456')"
-                  >
+                  <el-dropdown-item @click="setLoginCredentials('admin', '123456')">
                     系统管理员：admin/123456
                   </el-dropdown-item>
-                  <el-dropdown-item
-                    @click="setLoginCredentials('test', '123456')"
-                  >
+                  <el-dropdown-item @click="setLoginCredentials('test', '123456')">
                     测试小游客：test/123456
                   </el-dropdown-item>
                 </el-dropdown-menu>
@@ -64,39 +53,21 @@
               <el-icon class="mx-2">
                 <User />
               </el-icon>
-              <el-input
-                ref="username"
-                v-model="loginData.username"
-                :placeholder="$t('login.username')"
-                name="username"
-                size="large"
-                class="h-[48px]"
-              />
+              <el-input ref="username" v-model="loginData.username" :placeholder="$t('login.username')" name="username"
+                size="large" class="h-[48px]" />
             </div>
           </el-form-item>
 
           <!-- 密码 -->
-          <el-tooltip
-            :visible="isCapslock"
-            :content="$t('login.capsLock')"
-            placement="right"
-          >
+          <el-tooltip :visible="isCapslock" :content="$t('login.capsLock')" placement="right">
             <el-form-item prop="password">
               <div class="input-wrapper">
                 <el-icon class="mx-2">
                   <Lock />
                 </el-icon>
-                <el-input
-                  v-model="loginData.password"
-                  :placeholder="$t('login.password')"
-                  type="password"
-                  name="password"
-                  size="large"
-                  class="h-[48px] pr-2"
-                  show-password
-                  @keyup="checkCapslock"
-                  @keyup.enter="handleLoginSubmit"
-                />
+                <el-input v-model="loginData.password" :placeholder="$t('login.password')" type="password"
+                  name="password" size="large" class="h-[48px] pr-2" show-password @keyup="checkCapslock"
+                  @keyup.enter="handleLoginSubmit" />
               </div>
             </el-form-item>
           </el-tooltip>
@@ -105,20 +76,10 @@
           <el-form-item prop="captchaCode">
             <div class="input-wrapper">
               <svg-icon icon-class="captcha" class="mx-2" />
-              <el-input
-                v-model="loginData.captchaCode"
-                auto-complete="off"
-                size="large"
-                class="flex-1"
-                :placeholder="$t('login.captchaCode')"
-                @keyup.enter="handleLoginSubmit"
-              />
+              <el-input v-model="loginData.captchaCode" auto-complete="off" size="large" class="flex-1"
+                :placeholder="$t('login.captchaCode')" @keyup.enter="handleLoginSubmit" />
 
-              <el-image
-                :src="captchaBase64"
-                class="captcha-img"
-                @click="getCaptcha"
-              />
+              <el-image :src="captchaBase64" class="captcha-img" @click="getCaptcha" />
             </div>
           </el-form-item>
 
@@ -133,13 +94,7 @@
           </div>
 
           <!-- 登录按钮 -->
-          <el-button
-            :loading="loading"
-            type="primary"
-            size="large"
-            class="w-full"
-            @click.prevent="handleLoginSubmit"
-          >
+          <el-button :loading="loading" type="primary" size="large" class="w-full" @click.prevent="handleLoginSubmit">
             {{ $t("login.login") }}
           </el-button>
 
@@ -161,11 +116,7 @@
     <div class="login-footer">
       <el-text size="small">
         Copyright © 2021 - 2024 youlai.tech All Rights Reserved.
-        <el-link
-          :underline="false"
-          href="http://beian.miit.gov.cn/"
-          target="_blank"
-        >
+        <el-link :underline="false" href="http://beian.miit.gov.cn/" target="_blank">
           皖ICP备20006496号-2
         </el-link>
       </el-text>
@@ -332,8 +283,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  background: url("@/assets/images/login-background-light.jpg") no-repeat center
-    right;
+  background: url("@/assets/images/login-background-light.jpg") no-repeat center right;
 
   .login-header {
     position: absolute;
@@ -364,7 +314,7 @@ onMounted(() => {
     border-radius: 5px;
     box-shadow: var(--el-box-shadow-light);
 
-    @media (width <= 768px) {
+    @media (width <=768px) {
       flex-direction: column;
       max-width: 100%;
       height: 100vh;
@@ -380,7 +330,7 @@ onMounted(() => {
       justify-content: center;
       background: linear-gradient(60deg, #165dff, #6aa1ff);
 
-      @media (width <= 768px) {
+      @media (width <=768px) {
         display: none;
       }
     }
@@ -393,7 +343,7 @@ onMounted(() => {
       min-width: 400px;
       padding: 30px;
 
-      @media (width <= 768px) {
+      @media (width <=768px) {
         width: 100%;
         padding: 0 20px;
       }
@@ -471,8 +421,7 @@ onMounted(() => {
 
 html.dark {
   .login {
-    background: url("@/assets/images/login-background-dark.jpg") no-repeat
-      center right;
+    background: url("@/assets/images/login-background-dark.jpg") no-repeat center right;
 
     .login-content {
       background: transparent;

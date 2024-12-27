@@ -3,8 +3,11 @@
     <transition enter-active-class="animate__animated animate__fadeInLeft">
       <router-link :key="+collapse" class="wh-full flex-center" to="/">
         <img :src="logo" class="w20px h20px" />
-        <span v-if="!collapse" class="title">
+        <!-- <span v-if="!collapse" class="title">
           {{ defaultSettings.title }}
+        </span> -->
+        <span v-if="!collapse" class="title">
+          科创平台后台管理系统
         </span>
       </router-link>
     </transition>
@@ -30,7 +33,8 @@ defineProps({
   background-color: $sidebar-logo-background;
 
   .title {
-    flex-shrink: 0; /* 防止容器在空间不足时缩小 */
+    flex-shrink: 0;
+    /* 防止容器在空间不足时缩小 */
     margin-left: 10px;
     font-size: 14px;
     font-weight: bold;

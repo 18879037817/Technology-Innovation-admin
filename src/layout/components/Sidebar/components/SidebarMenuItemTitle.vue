@@ -32,8 +32,10 @@ defineProps({
 }
 
 .hideSidebar {
+
   .el-sub-menu,
   .el-menu-item {
+
     .svg-icon,
     .sub-el-icon {
       margin-left: 20px;
