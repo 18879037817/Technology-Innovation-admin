@@ -1,17 +1,36 @@
 <template>
   <div class="dashboard-container">
-    <!-- 单位科创指数排行榜 -->
-    <div class="flex home-top">
-      <div class="flex-row">
-        <Innovationvitality></Innovationvitality>
-      </div>
-      <div class="flex-row">
-        <Notice></Notice>
-      </div>
-      <div class="flex-row">
-        <Companyecharts></Companyecharts>
-      </div>
-    </div>
+    <github-corner class="github-corner" />
+
+    <el-card shadow="never">
+      <el-row justify="space-between">
+        <el-col :span="18" :xs="24">
+          <div class="flex h-full items-center">
+            <img class="w-20 h-20 mr-5 rounded-full" :src="userStore.userInfo.avatar + '?imageView2/1/w/80/h/80'" />
+            <div>
+              <p>{{ greetings }}</p>
+              <p class="text-sm text-gray">
+                今日天气晴朗，气温在15℃至25℃之间，东南风。
+              </p>
+            </div>
+          </div>
+        </el-col>
+
+        <el-col :span="6" :xs="24">
+          <div class="flex h-full items-center justify-around">
+            <el-statistic v-for="item in statisticData" :key="item.key" :value="item.value">
+              <template #title>
+                <div class="flex items-center">
+                  <svg-icon :icon-class="item.iconClass" size="20px" />
+                  <span class="text-[16px] ml-1">{{ item.title }}</span>
+                </div>
+              </template>
+              <template v-if="item.suffix" #suffix>/100</template>
+            </el-statistic>
+          </div>
+        </el-col>
+      </el-row>
+    </el-card>
 
     <!-- 数据卡片 -->
     <el-row :gutter="10" class="mt-5">
@@ -140,16 +159,13 @@
 </template>
 
 <script setup lang="ts">
-
 defineOptions({
   name: "Dashboard",
   inheritAttrs: false,
 });
 
 import VisitTrend from "./components/VisitTrend.vue";
-import Innovationvitality from "./components/Innovationvitality.vue"
-import Notice from "./components/Notice.vue"
-import Companyecharts from "./components/Companyecharts.vue"
+
 import WebSocketManager from "@/utils/websocket";
 import router from "@/router";
 
@@ -307,12 +323,12 @@ onMounted(() => {
   position: relative;
   padding: 24px;
 
-  .home-top {
-    justify-content: space-between;
-
-    .flex-row {
-      width: 32%;
-    }
+  .github-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    border: 0;
   }
 }
 </style>

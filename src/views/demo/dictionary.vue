@@ -7,12 +7,8 @@ const arrayValue = ref(["1", "2"]); // 性别(值为Array)
 
 <template>
   <div class="app-container">
-    <el-link
-      href="https://gitee.com/youlaiorg/vue3-element-admin/blob/master/src/views/demo/dictionary.vue"
-      type="primary"
-      target="_blank"
-      class="mb-[20px]"
-    >
+    <el-link href="https://gitee.com/youlaiorg/vue3-element-admin/blob/master/src/views/demo/dictionary.vue"
+      type="primary" target="_blank" class="mb-[20px]">
       示例源码 请点击>>>>
     </el-link>
     <el-form>
