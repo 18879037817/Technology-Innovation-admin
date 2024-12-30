@@ -36,6 +36,7 @@ onMounted(() => {
   NoticeAPI.getMyNoticePage({ pageNum: 1, pageSize: 10 }).then((data) => {
     notices.value = data.list;
   });
+  console.log('aaaaa')
 
 });
 </script>
