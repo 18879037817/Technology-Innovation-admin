@@ -57,6 +57,7 @@ onMounted(() => {
     notices.value = data.list;
   });
   console.log('aaaaa11111')
+  console.log('2222')
 
 });
 // 查看更多
