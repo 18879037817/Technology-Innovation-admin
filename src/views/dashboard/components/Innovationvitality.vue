@@ -1,6 +1,6 @@
 <template>
   <div class="Innovationvitality">
-    <div>
+    <div class="border-b">
       <div>积分排行榜</div>
     </div>
     <!-- -->
@@ -8,7 +8,7 @@
       <div class="Innovationvitality-h3">
         <h3 class="h3_color">{{ Title }}</h3>
       </div>
-      <div class="flex flex-x-around">
+      <div class="flex flex-x-around Innovationvitality-home">
         <div class="text-align">
           <img src="@/assets/icons/number_1.svg" alt="">
           <div>
@@ -31,8 +31,7 @@
           </div>
         </div>
       </div>
-      <div>
-
+      <div class="table-box">
         <el-table ref="dataTableRef" v-loading="loading" :data="roleList" highlight-current-row>
           <el-table-column label="分公司名称" prop="branchoffice" />
           <el-table-column label="数量" prop="number" />
@@ -58,14 +57,6 @@ const roleList = ref([
   {
     branchoffice: '赣县公司',
     number: '20'
-  },
-  {
-    branchoffice: '经济技术开发区分公司',
-    number: '20'
-  },
-  {
-    branchoffice: '龙南市分公司',
-    number: '20'
   }
 ])
 const loading = ref(false);
@@ -77,7 +68,7 @@ const Title = ref('');
   box-shadow: 3px 3px 10px #e0e0e0;
   border-radius: 5px;
   background-color: #ffffff;
-  padding: 20px;
+  // padding: 20px;
   height: 440px;
   overflow-y: auto;
 
@@ -100,6 +91,19 @@ const Title = ref('');
       padding: 0px;
       margin: 8px 0px;
     }
+  }
+
+  .border-b {
+    border-bottom: 1px solid #e4e7ed;
+    padding: 12px 15px;
+  }
+
+  .Innovationvitality-home {
+    padding: 0px 15px;
+  }
+
+  .table-box {
+    padding: 0px 15px;
   }
 
 }

@@ -40,7 +40,7 @@ function getoptionData() {
     // 设置y轴
     yAxis: {
       type: 'category',
-      data: ['A', 'B', 'C', 'D', 'E']
+      data: ['南昌分公司', '赣县分公司', '南康分公司', '经开区分公司', '信丰分公司']
     },
     // 设置系列列表
     series: [

@@ -19,8 +19,8 @@
           <el-scrollbar height="340">
             <div v-for="(item, index) in notices" :key="index" class="flex-y-center py-3">
               <DictLabel v-model="item.type" code="notice_type" size="small" />
-              <el-text truncated class="!mx-2 flex-1 !text-xs !text-[var(--el-text-color-secondary)]">
-                {{ item.title }}2222222222222222
+              <el-text truncated class="!mx-2 flex-1 !text-xs !text-[var(--el-text-color-secondary)] st-size">
+                {{ item.title }}
               </el-text>
               <el-link @click="viewNoticeDetail(item.id)">
                 <el-icon class="text-sm">
@@ -67,9 +67,13 @@ function viewMoreNotice() {
 
 <style lang="scss" scoped>
 .Notice {
+
   // box-shadow: 3px 3px 10px #e0e0e0;
   // border-radius: 5px;
   // background-color: #ffffff;
   // padding: 20px;
+  .st-size {
+    font-size: 14px !important;
+  }
 }
 </style>
