@@ -1,5 +1,8 @@
 <template>
   <div class="Innovationvitality">
+    <div>
+      <div>积分排行榜</div>
+    </div>
     <!-- -->
     <div class="Innovationvitality-box">
       <div class="Innovationvitality-h3">
@@ -38,49 +41,37 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'Innovationvitality',
-
-  data() {
-    return {
-      Title: '单位科创活力指数排行榜',
-      loading: false,
-      roleList: [
-        {
-          branchoffice: '龙南市分公司',
-          number: '20'
-        },
-        {
-          branchoffice: '南康区分公司',
-          number: '20'
-        },
-        {
-          branchoffice: '赣县公司',
-          number: '20'
-        },
-        {
-          branchoffice: '经济技术开发区分公司',
-          number: '20'
-        },
-        {
-          branchoffice: '龙南市分公司',
-          number: '20'
-        }
-      ],
-    };
+<script setup lang="ts">
+defineOptions({
+  name: "Notice",
+  inheritAttrs: false,
+});
+const roleList = ref([
+  {
+    branchoffice: '龙南市分公司',
+    number: '20'
   },
-
-  mounted() {
-
+  {
+    branchoffice: '南康区分公司',
+    number: '20'
   },
-
-  methods: {
-
+  {
+    branchoffice: '赣县公司',
+    number: '20'
   },
-};
+  {
+    branchoffice: '经济技术开发区分公司',
+    number: '20'
+  },
+  {
+    branchoffice: '龙南市分公司',
+    number: '20'
+  }
+])
+const loading = ref(false);
+const Title = ref('');
 </script>
+
 <style lang="scss" scoped>
 .Innovationvitality {
   box-shadow: 3px 3px 10px #e0e0e0;
@@ -103,6 +94,11 @@ export default {
 
     .text-align {
       text-align: center;
+    }
+
+    .text-align p {
+      padding: 0px;
+      margin: 8px 0px;
     }
   }
 
