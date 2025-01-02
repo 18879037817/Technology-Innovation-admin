@@ -31,6 +31,7 @@
         <Innovativefax></Innovativefax>
       </div>
     </div>
+    <ganttchart ref="ganttChartRef"></ganttchart>
   </div>
 </template>
 
@@ -47,6 +48,7 @@ import Scienceproject from "./components/Scienceproject.vue"
 import ExpertTeammanagement from "./components/ExpertTeammanagement.vue"
 import Excellentachievements from "./components/Excellentachievements.vue"
 import Innovativefax from "./components/Innovativefax.vue"
+import ganttchart from "./components/ganttchart.vue"
 onMounted(() => {
 
 });

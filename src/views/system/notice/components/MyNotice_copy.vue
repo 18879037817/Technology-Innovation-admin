@@ -25,10 +25,10 @@
     <el-card shadow="never">
       <el-table ref="dataTableRef" v-loading="loading" :data="pageData" highlight-current-row>
         <el-table-column type="index" label="序号" width="60" />
-        <el-table-column label="内容" prop="title" min-width="200" />
-        <el-table-column align="center" label="类型" width="150">
+        <el-table-column label="通知标题" prop="title" min-width="200" />
+        <el-table-column align="center" label="通知类型" width="150">
           <template #default="scope">
-            <el-tag type="primary">{{ scope.row.pointsType == 0 ? '积分' : '需求上报' }}</el-tag>
+            <DictLabel v-model="scope.row.type" code="notice_type" />
           </template>
         </el-table-column>
         <el-table-column align="center" label="发布人" prop="publisherName" width="100" />
@@ -73,16 +73,7 @@ import NoticeAPI, { NoticePageVO, NoticePageQuery } from "@/api/system/notice";
 
 const queryFormRef = ref(ElForm);
 const noticeDetailRef = ref();
-const points = ref([
-  {
-    id: 0,
-    name: '积分'
-  },
-  {
-    id: 1,
-    name: '需求上报'
-  },
-])
+
 const pageData = ref<NoticePageVO[]>([]);
 
 const loading = ref(false);
@@ -98,11 +89,7 @@ function handleQuery() {
   loading.value = true;
   NoticeAPI.getMyNoticePage(queryParams)
     .then((data) => {
-      data.list.forEach((v: any) => {
-        v.pointsType = 0;
-      })
       pageData.value = data.list;
-
       total.value = data.total;
     })
     .finally(() => {

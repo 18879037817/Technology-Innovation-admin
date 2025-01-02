@@ -8,33 +8,37 @@
       <div class="Innovationvitality-h3">
         <h3 class="h3_color">{{ Title }}</h3>
       </div>
-      <div class="flex flex-x-around Innovationvitality-home">
-        <div class="text-align">
-          <img src="@/assets/icons/number_1.svg" alt="">
-          <div>
-            <p>会昌分公司</p>
-            <p>20</p>
+      <el-carousel indicator-position="outside">
+        <el-carousel-item v-for="item in 4" :key="item">
+          <div class="flex flex-x-around Innovationvitality-home">
+            <div class="text-align">
+              <img src="@/assets/icons/number_1.svg" alt="">
+              <div>
+                <p>会昌分公司</p>
+                <p>20</p>
+              </div>
+            </div>
+            <div class="text-align">
+              <img src="@/assets/icons/number_2.svg" alt="">
+              <div>
+                <p>赣县分公司</p>
+                <p>20</p>
+              </div>
+            </div>
+            <div class="text-align">
+              <img src="@/assets/icons/number_3.svg" alt="">
+              <div>
+                <p>经济技术开发区分公司</p>
+                <p>20</p>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="text-align">
-          <img src="@/assets/icons/number_2.svg" alt="">
-          <div>
-            <p>赣县分公司</p>
-            <p>20</p>
-          </div>
-        </div>
-        <div class="text-align">
-          <img src="@/assets/icons/number_3.svg" alt="">
-          <div>
-            <p>经济技术开发区分公司</p>
-            <p>20</p>
-          </div>
-        </div>
-      </div>
+        </el-carousel-item>
+      </el-carousel>
       <div class="table-box">
         <el-table ref="dataTableRef" v-loading="loading" :data="roleList" highlight-current-row>
           <el-table-column label="分公司名称" prop="branchoffice" />
-          <el-table-column label="数量" prop="number" />
+          <el-table-column label="积分" prop="number" />
         </el-table>
       </div>
     </div>
@@ -107,4 +111,26 @@ const Title = ref('');
   }
 
 }
+
+
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 18px;
+  opacity: 0.75;
+  line-height: 100px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  // background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+  // background-color: #d3dce6;
+}
+
+::v-deep .el-carousel .el-carousel__container {
+  height: 150px;
+}
 </style>
+<style></style>
