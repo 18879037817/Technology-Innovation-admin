@@ -128,8 +128,9 @@ export interface NoticePageQuery extends PageQuery {
   title?: string;
   /** 发布状态(0：未发布，1：已发布，-1：已撤回) */
   publishStatus?: number;
-
+  status?:number;
   isRead?: number;
+  createTime?: [string, string];
 }
 
 /** 通知公告表单对象 */

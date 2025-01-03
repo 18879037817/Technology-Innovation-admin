@@ -1,25 +1,36 @@
 <template>
   <div class="app-container">
     <div class="search-bar">
-      <el-form ref="queryFormRef" :model="queryParams" :inline="true">
-        <el-form-item label="通知标题" prop="title">
-          <el-input v-model="queryParams.title" placeholder="关键字" clearable @keyup.enter="handleQuery()" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="handleQuery()">
-            <template #icon>
-              <Search />
-            </template>
-            搜索
-          </el-button>
-          <el-button @click="handleResetQuery()">
-            <template #icon>
-              <Refresh />
-            </template>
-            重置
-          </el-button>
-        </el-form-item>
-      </el-form>
+
+      <!-- 开始 -->
+      <el-tabs v-model="activeName" class="demo-tabs">
+        <el-tab-pane :label="item.name" :name="item.id" v-for="(item, index) in TabData">
+          <el-form ref="queryFormRef" :model="queryParams" :inline="true">
+            <el-form-item label="通知标题" prop="title">
+              <el-input v-model="queryParams.title" placeholder="关键字" clearable @keyup.enter="handleQuery()" />
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="handleQuery()">
+                <template #icon>
+                  <Search />
+                </template>
+                搜索
+              </el-button>
+              <el-button @click="handleResetQuery()">
+                <template #icon>
+                  <Refresh />
+                </template>
+                重置
+              </el-button>
+
+              <el-button type="success">批量导出</el-button>
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
+
+      </el-tabs>
+      <!-- 结束 -->
+
     </div>
 
     <el-card shadow="never">
@@ -46,11 +57,14 @@
             <el-tag v-else type="info">未读</el-tag>
           </template>
         </el-table-column>
-        <el-table-column align="center" fixed="right" label="操作" width="80">
+        <el-table-column align="center" fixed="right" label="操作">
           <template #default="scope">
             <el-button type="primary" size="small" link @click="viewNoticeDetail(scope.row.id)">
               查看
             </el-button>
+            <el-button type="primary" size="small" link @click="handleDelete(scope.row.id)">通过</el-button>
+
+            <el-button type="primary" size="small" link @click="reject">驳回</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -60,6 +74,23 @@
     </el-card>
 
     <NoticeDetail ref="noticeDetailRef" />
+
+    <!-- 驳回弹窗开始 -->
+    <el-dialog v-model="dialog.visible" :title="dialog.title" width="600px" @close="handleCloseDialog">
+      <el-form ref="roleFormRef" :model="formData" :rules="rules" label-width="100px">
+        <el-form-item label="驳回原因" prop="release">
+          <el-input v-model="formData.release" placeholder="请输入驳回原因" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button type="primary" @click="handleSubmit">确 定</el-button>
+          <el-button @click="handleCloseDialog">取 消</el-button>
+        </div>
+      </template>
+    </el-dialog>
+    <!-- 驳回弹窗结束 -->
+
   </div>
 </template>
 
@@ -73,6 +104,24 @@ import NoticeAPI, { NoticePageVO, NoticePageQuery } from "@/api/system/notice";
 
 const queryFormRef = ref(ElForm);
 const noticeDetailRef = ref();
+const rules = reactive({
+  release: [{ required: true, message: "请输入驳回原因", trigger: "blur" }],
+});
+const activeName = ref('ProjectReview');
+const TabData = reactive([
+  {
+    id: 'ProjectReview',
+    name: '项目审核'
+  },
+  {
+    id: 'Personalpointsreview',
+    name: '个人积分审核'
+  },
+  {
+    id: 'Unitpointreview',
+    name: '单位积分审核'
+  }
+])
 const points = ref([
   {
     id: 0,
@@ -91,6 +140,15 @@ const total = ref(0);
 const queryParams = reactive<NoticePageQuery>({
   pageNum: 1,
   pageSize: 10,
+});
+
+const dialog = reactive({
+  title: "驳回",
+  visible: false,
+});
+
+const formData = reactive({
+  release: ''
 });
 
 /** 查询通知公告 */
@@ -120,7 +178,27 @@ function handleResetQuery() {
 function viewNoticeDetail(id: string) {
   noticeDetailRef.value.openNotice(id);
 }
+const handleSubmit = () => {
+  dialog.visible = false;
+}
 
+const handleCloseDialog = () => {
+  dialog.visible = false;
+}
+const reject = () => {    //驳回
+  dialog.visible = true;
+}
+
+// 删除系统配置
+function handleDelete(id: number) {
+  ElMessageBox.confirm("确认通过吗?", "提示", {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+    type: "info",
+  }).then(() => {
+    loading.value = false;
+  });
+}
 onMounted(() => {
   handleQuery();
 });
